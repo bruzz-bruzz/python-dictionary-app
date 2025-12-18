@@ -52,17 +52,21 @@ def fetchWord():
     word,definition, example = '','',''
     def getWord():
         global word,definition,example
+        
         with open('a.json','r') as f:
             data = json.load(f)
-            idx = data['words'].index(getEnt.get())
-            word,definition,example = data['words'][idx], data['definitions'][idx], data['examples'][idx]
-            mTxt,exTxt = '',''
-            for x in range(len(definition)):
-                mTxt += str(x+1) + '. ' + str(definition[x]) + '\n'
-            for x in range(len(example)):
-                exTxt += str(x+1) + '. ' + str(example[x]) + '\n'
-            mLbl.config(text=mTxt)
-            exLbl.config(text=exTxt)
+            if getEnt.get() in data['words']:
+                idx = data['words'].index(getEnt.get())
+                word,definition,example = data['words'][idx], data['definitions'][idx], data['examples'][idx]
+                mTxt,exTxt = '',''
+                for x in range(len(definition)):
+                    mTxt += str(x+1) + '. ' + str(definition[x]) + '\n' + 'Example: ' + str(example[x]) + '\n'
+                
+                mLbl.config(text=mTxt)
+                statusLbl.config(text=f'successfully fetched data for {getEnt.get()}')
+            else:
+                statusLbl.config(text=f'{getEnt.get()} not in list.')
+         
     fetchWindow = Tk()
     fetchWindow.title('Get Word')
     fetchWindow.geometry('300x500+25+25')
@@ -73,9 +77,8 @@ def fetchWord():
     Label(fetchWindow,text='Definitions: ').pack()
     mLbl = Label(fetchWindow,text='',wraplength=280)
     mLbl.pack()
-    Label(fetchWindow,text='Examples: ').pack()
-    exLbl = Label(fetchWindow,text='',wraplength= 280)
-    exLbl.pack()
+    statusLbl = Label(fetchWindow,text='')
+    statusLbl.pack()
     fetchWindow.mainloop()
 def listAll():
 

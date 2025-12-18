@@ -65,6 +65,7 @@ def fetchWord():
                 mLbl.config(text=mTxt)
                 statusLbl.config(text=f'successfully fetched data for {getEnt.get()}')
             else:
+                mLbl.config(text='')
                 statusLbl.config(text=f'{getEnt.get()} not in list.')
          
     fetchWindow = Tk()

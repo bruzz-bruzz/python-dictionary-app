@@ -1,4 +1,4 @@
-<h1>A Dictionary App that can save past searches data with a web API.</h1>
+<h1>A Dictionary App that can save past searches' data with a web API.</h1>
 <h3>How it works: </h3>
 <ul>
   <li>Storing data in a JSON file (a.json in this case).</li>
